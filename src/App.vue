@@ -1,30 +1,34 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <component :is="layout">
+    <router-view />
+  </component>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
-#nav {
-  padding: 30px;
+import DefaultLayout from "@/layouts/DefaultLayout.vue";
+import SidebarLayout from "@/layouts/SidebarLayout.vue";
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+export default {
+  name: "App",
+  components: {
+    DefaultLayout,
+    SidebarLayout,
+  },
+  setup() {
+    const layoutList = { default: DefaultLayout, sidebar: SidebarLayout };
+    const route = useRoute();
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+    const layout = computed(() => {
+      const keyLayout = route.meta.layout || "default";
+      return layoutList[keyLayout];
+    });
+
+    return {
+      layout,
+    };
+  },
+};
+</script>

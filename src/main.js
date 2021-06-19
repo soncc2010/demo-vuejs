@@ -1,6 +1,16 @@
 import { createApp } from "vue";
+import { createHead } from "@vueuse/head";
+import mitt from "mitt";
+
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
 
-createApp(App).use(store).use(router).mount("#app");
+const app = createApp(App);
+const head = createHead();
+const eventBus = mitt();
+
+app.use(head);
+app.use(router);
+app.config.globalProperties.eventBus = eventBus;
+app.provide("eventBus", eventBus);
+app.mount("#app");

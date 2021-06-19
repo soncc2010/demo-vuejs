@@ -1,0 +1,8 @@
+.alert {
+  font-size: convert-rem(18);
+  padding: 0 0 convert-rem(35);
+
+  &--success {
+    color: $green;
+  }
+}

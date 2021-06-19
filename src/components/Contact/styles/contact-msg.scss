@@ -1,0 +1,18 @@
+.table-contact-msg {
+  width: 100%;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: convert-rem(10) convert-rem(15);
+    text-align: left;
+    border: 1px solid $gray-200;
+  }
+  > tbody {
+    > tr {
+      > th {
+        width: convert-rem(100);
+        text-transform: uppercase;
+      }
+    }
+  }
+}
