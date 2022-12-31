@@ -14,3 +14,4 @@ app.use(router);
 app.config.globalProperties.eventBus = eventBus;
 app.provide("eventBus", eventBus);
 app.mount("#app");
+// test
